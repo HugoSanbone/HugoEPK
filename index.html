@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hugo Sanbone — Official Electronic Press Kit (EPK)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display (Serif Elegance) & Inter (Sans Precision) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#0c0d0e',
+                            surface: '#141619',
+                            card: '#1a1d22',
+                            border: '#2a2e36'
+                        },
+                        gold: {
+                            DEFAULT: '#d4af37',
+                            light: '#f3e5ab',
+                            dark: '#aa8c2c',
+                            glow: 'rgba(212, 175, 55, 0.25)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0c0d0e;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom Gold Glows & Accents */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .gold-border-glow:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c0d0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2e36;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+
+        /* Video Aspect Ratio */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Lightbox Overlay Animation */
+        .lightbox-active {
+            display: flex !important;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-black min-h-screen flex flex-col justify-between">
+
+ <!-- 1. FIXED HEADER / NAVBAR -->
+<header class="fixed top-0 left-0 w-full z-50 bg-dark-base/90 backdrop-blur-md border-b border-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a href="#" class="flex flex-col group">
+            <span class="font-serif text-xl sm:text-2xl font-bold tracking-widest text-white group-hover:text-gold transition-colors">
+                HUGO SANBONE
+            </span>
+            <span class="text-[9px] uppercase tracking-[0.25em] text-gold font-medium">Trombonist | Composer | Arranger | Educator & Artist</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-wider font-medium text-gray-300">
+            <a href="#about" class="hover:text-gold transition-colors">About</a>
+            <a href="#sound" class="hover:text-gold transition-colors">Sound & Style</a>
+            <a href="#videos" class="hover:text-gold transition-colors">Videos</a>
+            <a href="#press" class="hover:text-gold transition-colors">Press</a>
+            <a href="#gallery" class="hover:text-gold transition-colors">Gallery</a>
+            <button onclick="openContactModal()" class="px-4 py-2 border border-gold/60 text-gold rounded-full hover:bg-gold hover:text-black transition-all duration-300 shadow-sm hover:shadow-gold/20 flex items-center gap-2">
+                <i class="fa-solid fa-envelope text-xs"></i> sanboneworks@gmail.com
+            </button>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden text-gray-300 hover:text-gold focus:outline-none p-2">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-dark-surface border-b border-gold/20 px-6 py-6 space-y-4">
+        <a href="#about" class="mobile-nav-link block text-sm uppercase tracking-wider text-gray-300 hover:text-gold">About</a>
+        <a href="#sound" class="mobile-nav-link block text-sm uppercase tracking-wider text-gray-300 hover:text-gold">Sound & Style</a>
+        <a href="#videos" class="mobile-nav-link block text-sm uppercase tracking-wider text-gray-300 hover:text-gold">Videos</a>
+        <a href="#press" class="mobile-nav-link block text-sm uppercase tracking-wider text-gray-300 hover:text-gold">Press</a>
+        <a href="#gallery" class="mobile-nav-link block text-sm uppercase tracking-wider text-gray-300 hover:text-gold">Gallery</a>
+        <button onclick="openContactModal()" class="mobile-nav-link inline-block w-full text-center px-4 py-2 border border-gold text-gold rounded-full hover:bg-gold hover:text-black transition-all">
+            <i class="fa-solid fa-envelope text-xs mr-2"></i> sanboneworks@gmail.com
+        </button>
+    </div>
+</header>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <main class="pt-20 flex-grow">
+
+        <!-- 2. HERO SECTION -->
+        <section class="relative min-h-[90vh] flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <!-- Subtle Gold Radial Background Accent -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold/10 via-dark-base to-dark-base pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Left: Text & CTA -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/40 bg-gold/10 text-gold text-xs uppercase tracking-widest font-semibold">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Salt Lake City, UT, USA</span>
+                    </div>
+
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                        HUGO <span class="gold-gradient-text">SANBONE</span>
+                    </h1>
+
+                    <p class="text-base sm:text-xl text-gray-300 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Brazilian Jazz Trombonist <span class="text-gold">•</span> Composer <span class="text-gold">•</span> Arranger <span class="text-gold">•</span> Multi-Instrumentalist
+                    </p>
+
+                    <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#videos" class="px-7 py-3.5 bg-gradient-to-r from-gold to-gold-dark text-black font-semibold rounded-full hover:brightness-110 transition-all shadow-lg shadow-gold/20 flex items-center gap-2">
+                            <i class="fa-solid fa-play text-sm"></i> Watch Videos
+                        </a>
+                        <a href="#press" class="px-7 py-3.5 border border-gold/50 text-gold rounded-full hover:bg-gold/10 transition-all flex items-center gap-2 font-semibold">
+                            <i class="fa-solid fa-newspaper text-sm"></i> View Press
+                        </a>
+                        <a href="#contact" class="px-7 py-3.5 bg-dark-card border border-dark-border text-gray-200 hover:text-gold hover:border-gold/50 rounded-full transition-all flex items-center gap-2 font-semibold">
+                            <i class="fa-solid fa-envelope text-sm"></i> Booking
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Featured Portrait Image -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Decorative Backing Frame -->
+                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-b from-gold via-gold/40 to-transparent opacity-60 blur-sm"></div>
+                        <div class="relative rounded-2xl overflow-hidden bg-dark-card border-2 border-gold/50 shadow-2xl">
+                            <img src="Hugo Sanbone.JPG" 
+                                 alt="Hugo Sanbone Formal Studio Portrait" 
+                                 class="w-full h-auto object-cover hover:scale-205 transition-transform duration-700 ease-out"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x800/1a1d22/d4af37?text=Hugo+Sanbone+Portrait';">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent text-center">
+                                <span class="text-xs uppercase tracking-widest text-gold font-medium">Official Rath Trombones Artist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ABOUT THE ARTIST (BIOGRAPHY) -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface/50 border-y border-dark-border">
+            <div class="max-w-5xl mx-auto space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Biography</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">About the Artist</h2>
+                    <div class="w-16 h-1 bg-gold mx-auto rounded-full mt-2"></div>
+                </div>
+
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 text-gold/10 pointer-events-none">
+                        <i class="fa-solid fa-music text-8xl"></i>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed font-light">
+                        Hugo Sanbone is a Brazilian multi-instrumentalist, composer, and arranger whose work brings together jazz, commercial music, and Afro-diasporic influences. Performing on trombone, trumpet, saxophone, and accordion, his musical approach combines original arrangements, distinctive grooves, and a strong sense of rhythmic interplay.
+                    </p>
+
+                    <p class="text-base sm:text-lg text-gray-300 leading-relaxed font-light mt-6">
+                        Drawing on the traditions of jazz and contemporary music, Sanbone develops a sound that reflects his experience as a performer, composer, and ensemble leader. With more than two decades of musical experience, he has performed internationally, collaborating with artists and ensembles across jazz and Afro-diasporic music.
+                    </p>
+
+                    <!-- Key Attributes Badges -->
+                    <div class="mt-8 pt-8 border-t border-dark-border flex flex-wrap gap-3">
+                        <span class="px-3.5 py-1.5 rounded-lg bg-dark-surface border border-gold/30 text-gold text-xs font-medium uppercase tracking-wider">
+                            20+ Years Experience
+                        </span>
+                        <span class="px-3.5 py-1.5 rounded-lg bg-dark-surface border border-gold/30 text-gold text-xs font-medium uppercase tracking-wider">
+                            Multi-Instrumentalist
+                        </span>
+                        <span class="px-3.5 py-1.5 rounded-lg bg-dark-surface border border-gold/30 text-gold text-xs font-medium uppercase tracking-wider">
+                            International Performer
+                        </span>
+                        <span class="px-3.5 py-1.5 rounded-lg bg-dark-surface border border-gold/30 text-gold text-xs font-medium uppercase tracking-wider">
+                            Arranger & Leader
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MUSIC STYLE & SOUND PROFILE -->
+        <section id="sound" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-2 mb-12">
+                <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Artistic Identity</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Music Style & Sound Profile</h2>
+                <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Genre Spectrum -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-gold/40 transition-colors">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl">
+                            <i class="fa-solid fa-compact-disc"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white">Genres & Focus</h3>
+                            <p class="text-xs text-gold uppercase tracking-wider">Style Categorization</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold mt-1"></i>
+                            <div>
+                                <strong class="text-white">Contemporary Jazz:</strong> Expressive brass leads, sophisticated harmonies, and modern modal improvisation.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold mt-1"></i>
+                            <div>
+                                <strong class="text-white">Brazilian & Afro-diasporic Rhythms:</strong> Complex syncopation, Samba-Jazz, Baião, and Frevo grooves.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold mt-1"></i>
+                            <div>
+                                <strong class="text-white">Brass & Ensemble Work:</strong> Rich horn section voicing across trombone, trumpet, and saxophone.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-gold mt-1"></i>
+                            <div>
+                                <strong class="text-white">Original Arrangements:</strong> Versatile compositions tailored for full jazz orchestras and compact combos.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sounds Like / Aesthetic -->
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-8 hover:border-gold/40 transition-colors">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-white">Sounds Like</h3>
+                            <p class="text-xs text-gold uppercase tracking-wider">Aesthetic Description</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed font-light text-base">
+                        A distinctive blend of contemporary jazz, Brazilian rhythms, Afro-Brazilian musical traditions, and Afro-diasporic grooves, shaped by a modern jazz language, intricate arrangements, and dynamic ensemble interplay. The music balances composition and improvisation, bringing together diverse influences through a strong sense of groove, swing, and collective expression.
+                    </p>
+
+                    <div class="mt-8 p-4 rounded-xl bg-dark-surface border border-gold/20">
+                        <h4 class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Primary Instrumentation</h4>
+                        <div class="flex flex-wrap gap-2 text-xs text-gray-300">
+                            <span class="px-2.5 py-1 rounded bg-dark-base border border-dark-border">Tenor / Lead Trombone</span>
+                            <span class="px-2.5 py-1 rounded bg-dark-base border border-dark-border">Trumpet</span>
+                            <span class="px-2.5 py-1 rounded bg-dark-base border border-dark-border">Saxophone</span>
+                            <span class="px-2.5 py-1 rounded bg-dark-base border border-dark-border">Accordion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- 5. FEATURED VIDEOS (YOUTUBE EMBEDS & SWITCHER) -->
+<!-- SECTION: FEATURED VIDEOS (YOUTUBE EMBEDS) -->
+<section id="videos" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface/50 border-y border-dark-border">
+    <div class="max-w-6xl mx-auto space-y-10">
+        <!-- Section Header -->
+        <div class="text-center space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Media Library</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Featured Video Performances</h2>
+            <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
+        </div>
+
+        <!-- Video Grid: Both Videos Side-by-Side -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Video 1 -->
+            <div class="bg-dark-card border border-gold/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div>
+                    <!-- Thumbnail / Facade Wrapper -->
+                    <div id="wrapper-video-1" class="relative w-full aspect-video bg-black cursor-pointer group" onclick="playVideo('wrapper-video-1', 'HqMmUrbt7po')">
+                        <img src="https://img.youtube.com/vi/HqMmUrbt7po/maxresdefault.jpg" 
+                             alt="Hugo Sanbone Performance 1 Thumbnail" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+                        <!-- YouTube Play Button Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                            <div class="w-16 h-12 sm:w-20 sm:h-14 bg-red-600 group-hover:bg-red-700 text-white rounded-2xl flex items-center justify-center shadow-2xl transition-all group-hover:scale-110">
+                                <i class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info & Description -->
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-gold px-2.5 py-1 rounded bg-gold/10 border border-gold/30">Performance Showcase 1</span>
+                        <h3 class="font-serif text-xl font-bold text-white mt-2">Hugo Sanbone Ensemble Live</h3>
+                        <p class="text-xs text-gray-400">Featured live recording showcasing original arrangements and brass composition.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Link -->
+                <div class="px-5 py-4 bg-dark-surface border-t border-dark-border flex items-center justify-between">
+                    <span class="text-xs text-gray-400">YouTube Official</span>
+                    <a href="https://youtu.be/HqMmUrbt7po?si=YSAXlnNMBc6jh_3i" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="px-3.5 py-1.5 rounded-lg bg-red-600/20 border border-red-500/40 text-red-400 hover:bg-red-600 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-brands fa-youtube"></i> Watch on YouTube
+                    </a>
+                </div>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="bg-dark-card border border-gold/30 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+                <div>
+                    <!-- Thumbnail / Facade Wrapper -->
+                    <div id="wrapper-video-2" class="relative w-full aspect-video bg-black cursor-pointer group" onclick="playVideo('wrapper-video-2', 'LbkbJFeZyrY')">
+                        <img src="https://img.youtube.com/vi/LbkbJFeZyrY/maxresdefault.jpg" 
+                             alt="Hugo Sanbone Performance 2 Thumbnail" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+                        <!-- YouTube Play Button Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                            <div class="w-16 h-12 sm:w-20 sm:h-14 bg-red-600 group-hover:bg-red-700 text-white rounded-2xl flex items-center justify-center shadow-2xl transition-all group-hover:scale-110">
+                                <i class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info & Description -->
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-gold px-2.5 py-1 rounded bg-gold/10 border border-gold/30">Performance Showcase 2</span>
+                        <h3 class="font-serif text-xl font-bold text-white mt-2">Hugo Sanbone — Live Session</h3>
+                        <p class="text-xs text-gray-400">Live performance featuring contemporary Brazilian jazz grooves and instrumental virtuosity.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Link -->
+                <div class="px-5 py-4 bg-dark-surface border-t border-dark-border flex items-center justify-between">
+                    <span class="text-xs text-gray-400">YouTube Official</span>
+                    <a href="https://youtu.be/LbkbJFeZyrY?si=XStq-cEoMQ2afxuM" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="px-3.5 py-1.5 rounded-lg bg-red-600/20 border border-red-500/40 text-red-400 hover:bg-red-600 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-brands fa-youtube"></i> Watch on YouTube
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        <!-- 6. PRESS & PERFORMANCE HIGHLIGHTS -->
+        <section id="press" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-2 mb-12">
+                <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">Recognition</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Press & Performance Highlights</h2>
+                <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- IBOC Feature -->
+                <a href="https://www.iboc.nyc/news/hugo-sanbone-%22horizons%22-" target="_blank" rel="noopener noreferrer" 
+                   class="gold-border-glow bg-dark-card rounded-2xl p-6 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-wider border border-gold/30">
+                                Feature Composition
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-gold transition-colors"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold transition-colors mb-2">
+                            International Brazilian Opera Company (IBOC)
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Official premiere feature on Hugo Sanbone's original composition <span class="text-white font-medium">"Horizons"</span>, highlighting orchestral and Brazilian jazz synthesis.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dark-border text-xs text-gold font-semibold flex items-center gap-2">
+                        <span>Read Full Article on IBOC.nyc</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <!-- Brasil Summerfest -->
+                <a href="https://www.bklynlibrary.org/calendar/brasil-summerfest-hugo-central-library-plaza-20240724-0700pm" target="_blank" rel="noopener noreferrer" 
+                   class="gold-border-glow bg-dark-card rounded-2xl p-6 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-wider border border-gold/30">
+                                Festival Headliner
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-gold transition-colors"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold transition-colors mb-2">
+                            Brasil Summerfest 2024
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Outdoor mainstage performance at the Brooklyn Public Library Central Library Plaza in New York City.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dark-border text-xs text-gold font-semibold flex items-center gap-2">
+                        <span>View Brooklyn Library Calendar Event</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <!-- The Clemente Center -->
+                <a href="https://www.theclementecenter.org/calendar/emele-k-2023" target="_blank" rel="noopener noreferrer" 
+                   class="gold-border-glow bg-dark-card rounded-2xl p-6 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-wider border border-gold/30">
+                                NYC Showcase
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-gold transition-colors"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold transition-colors mb-2">
+                            The Clemente Center NYC
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Featured artist performance showcase celebrating Afro-diasporic musical traditions and brass jazz arrangements in Lower Manhattan.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dark-border text-xs text-gold font-semibold flex items-center gap-2">
+                        <span>Explore Clemente Center Calendar</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <!-- Rath Trombones Endorsement -->
+                <a href="https://www.rathtrombones.com/products/hugo-sanbone" target="_blank" rel="noopener noreferrer" 
+                   class="gold-border-glow bg-dark-card rounded-2xl p-6 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded bg-gold/10 text-gold text-[10px] font-bold uppercase tracking-wider border border-gold/30">
+                                Official Endorsement
+                            </span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-gold transition-colors"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold transition-colors mb-2">
+                            Rath Trombones Artist Profile
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Official endorsement roster listing by Michael Rath Trombones, showcasing Hugo Sanbone's choice of instruments and global artistry.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-dark-border text-xs text-gold font-semibold flex items-center gap-2">
+                        <span>Visit Rath Trombones Profile</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 7. PRESS PHOTO GALLERY (WITH LIGHTBOX) -->
+        Here is the reorganized code for the Press Photo Gallery section (id="gallery") with all 12 photos embedded (Hugo 1.jpeg through Hugo 9.jpeg, HugoSanbone.JPG, Hugo NYC.png, and HugoSanbone.png), ready to be pasted directly into your HTML file:
+
+<!-- 7. PRESS PHOTO GALLERY (13 HIGH-RES IMAGES & INTERACTIVE LIGHTBOX) -->
+<section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface/50 border-y border-dark-border">
+    <div class="max-w-7xl mx-auto space-y-10">
+        <!-- Section Header -->
+        <div class="text-center space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">High-Res Media</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Press Photo Gallery</h2>
+            <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
+            <p class="text-xs text-gray-400 mt-2">Click any photo for full-screen lightbox preview.</p>
+        </div>
+
+        <!-- 13-Photo Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            
+            <!-- Photo 1 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 1.jpeg', 'Hugo 1', 0)">
+                    <img src="Hugo 1.jpeg" alt="Hugo 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+1';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 1.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 2.jpeg', 'Hugo 2', 1)">
+                    <img src="Hugo 2.jpeg" alt="Hugo 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+2';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 2.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 3.jpeg', 'Hugo 3', 2)">
+                    <img src="Hugo 3.jpeg" alt="Hugo 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+3';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 3.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 4.jpeg', 'Hugo 4', 3)">
+                    <img src="Hugo 4.jpeg" alt="Hugo 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+4';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 4.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 5.jpeg', 'Hugo 5', 4)">
+                    <img src="Hugo 5.jpeg" alt="Hugo 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+5';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 5.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 6.jpeg', 'Hugo 6', 5)">
+                    <img src="Hugo 6.jpeg" alt="Hugo 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+6';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 6.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 7 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 7.jpeg', 'Hugo 7', 6)">
+                    <img src="Hugo 7.jpeg" alt="Hugo 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+7';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 7.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 8 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 8.jpeg', 'Hugo 8', 7)">
+                    <img src="Hugo 8.jpeg" alt="Hugo 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+8';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 8.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 9 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 9.jpeg', 'Hugo 9', 8)">
+                    <img src="Hugo 9.jpeg" alt="Hugo 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+9';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 9.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 10 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 10.JPG', 'Hugo 10', 9)">
+                    <img src="Hugo 10.JPG" alt="Hugo 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+10';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 10.JPG" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 11 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 11.jpeg', 'Hugo 11', 10)">
+                    <img src="Hugo 11.jpeg" alt="Hugo 11" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+11';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 11.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 12 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 12.png', 'Hugo 12', 11)">
+                    <img src="Hugo 12.png" alt="Hugo 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+12';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 12.png" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 13 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 13.png', 'Hugo 13', 12)">
+                    <img src="Hugo 13.png" alt="Hugo 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+13';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 13.png" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 14 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 13.jpeg', 'Hugo 14', 12)">
+                    <img src="Hugo 14.jpeg" alt="Hugo 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+14';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 14.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 15 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 15.jpeg', 'Hugo 15', 12)">
+                    <img src="Hugo 15.jpeg" alt="Hugo 15" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+15';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 15.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+            <!-- Photo 16 -->
+            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
+                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 16.jpeg', 'Hugo 16', 12)">
+                    <img src="Hugo 16.jpeg" alt="Hugo 16" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+16';">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
+                    </div>
+                </div>
+                <div class="absolute bottom-2 right-2 z-10">
+                    <a href="Hugo 16.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- 9. FOOTER -->
+    <footer class="bg-dark-surface border-t border-dark-border py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <span class="font-serif text-lg font-bold text-white tracking-wider block">HUGO SANBONE</span>
+                <p class="text-xs text-gray-400 mt-1">© <span id="year-span"></span> Hugo Sanbone. All rights reserved. Electronic Press Kit.</p>
+            </div>
+
+            <!-- Social / Quick Links -->
+            <div class="flex items-center space-x-6 text-gray-400">
+                <a href="https://www.rathtrombones.com/products/hugo-sanbone" target="_blank" aria-label="Rath Trombones Profile" class="hover:text-gold transition-colors">
+                    <i class="fa-solid fa-music text-lg"></i>
+                </a>
+                <a href="https://www.youtube.com/watch?v=HqMmUrbt7po" target="_blank" aria-label="Official YouTube Channel" class="hover:text-gold transition-colors">
+                    <i class="fa-brands fa-youtube text-lg"></i>
+                </a>
+                <a href="mailto:hugosanboneus@gmail.com" aria-label="Email Hugo Sanbone" class="hover:text-gold transition-colors">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                </a>
+            </div>
+
+            <!-- Back to Top Button -->
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+                    class="px-4 py-2 border border-dark-border rounded-full text-xs text-gray-400 hover:text-gold hover:border-gold transition-all flex items-center gap-2">
+                <span>Back to Top</span>
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-gold text-black px-6 py-3 rounded-xl font-semibold shadow-2xl border border-gold-light items-center gap-3 text-sm">
+        <i class="fa-solid fa-circle-check text-base"></i>
+        <span id="toast-message">Action successful</span>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLERS -->
+    <script>
+        // Set Copyright Year Dynamically
+        document.getElementById('year-span').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Interactive YouTube Video Switcher
+        function switchVideo(videoId, directUrl, index) {
+            const iframe = document.getElementById('main-youtube-iframe');
+            const directLink = document.getElementById('youtube-direct-link');
+            const title = document.getElementById('video-title');
+            
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            directLink.href = directUrl;
+
+            const btn1 = document.getElementById('btn-video-1');
+            const btn2 = document.getElementById('btn-video-2');
+
+            if (index === 1) {
+                title.textContent = "Hugo Sanbone Ensemble Live — Showcase 1";
+                btn1.className = "px-5 py-2.5 rounded-full border border-gold bg-gold text-black font-semibold text-sm transition-all flex items-center gap-2 shadow-md shadow-gold/20";
+                btn2.className = "px-5 py-2.5 rounded-full border border-dark-border bg-dark-card text-gray-300 hover:border-gold/50 text-sm transition-all flex items-center gap-2";
+            } else {
+                title.textContent = "Hugo Sanbone Multi-Instrumental Feature — Showcase 2";
+                btn2.className = "px-5 py-2.5 rounded-full border border-gold bg-gold text-black font-semibold text-sm transition-all flex items-center gap-2 shadow-md shadow-gold/20";
+                btn1.className = "px-5 py-2.5 rounded-full border border-dark-border bg-dark-card text-gray-300 hover:border-gold/50 text-sm transition-all flex items-center gap-2";
+            }
+        }
+
+        // Gallery Lightbox Functionality
+        function openLightbox(src, captionText) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            const downloadBtn = document.getElementById('lightbox-download-btn');
+
+            img.src = src;
+            caption.textContent = captionText;
+            downloadBtn.href = src;
+
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('lightbox-active');
+            document.body.style.overflow = 'hidden'; // Lock background scrolling
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('lightbox-active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close Lightbox on ESC Key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Copy Email to Clipboard
+        function copyEmail() {
+            const email = "hugosanboneus@gmail.com";
+            
+            // execCommand fallback for strict iFrame permissions
+            const tempInput = document.createElement("input");
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast("Email copied to clipboard!");
+            
+            const copyBtnText = document.getElementById('copy-btn-text');
+            copyBtnText.textContent = "Copied!";
+            setTimeout(() => {
+                copyBtnText.textContent = "Copy";
+            }, 3000);
+        }
+
+        // Form Submission Handling
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('form-name').value;
+            showToast(`Thank you, ${name}! Your booking inquiry has been sent.`);
+            document.getElementById('booking-form').reset();
+        }
+
+        // Toast Notification Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
