@@ -518,230 +518,246 @@
         Here is the reorganized code for the Press Photo Gallery section (id="gallery") with all 12 photos embedded (Hugo 1.jpeg through Hugo 9.jpeg, HugoSanbone.JPG, Hugo NYC.png, and HugoSanbone.png), ready to be pasted directly into your HTML file:
 
 <!-- 7. PRESS PHOTO GALLERY (13 HIGH-RES IMAGES & INTERACTIVE LIGHTBOX) -->
+<!-- PRESS PHOTO GALLERY -->
+
+<style>
+    .press-photo-card {
+        overflow: hidden;
+        border: 1px solid #343434;
+        border-radius: 12px;
+        background: #171717;
+        transition: border-color 0.25s ease;
+    }
+
+    .press-photo-card:hover {
+        border-color: #d4af37;
+    }
+
+    .press-photo-area {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background: #000;
+        cursor: pointer;
+    }
+
+    .press-photo-thumbnail {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .press-photo-area:hover .press-photo-thumbnail {
+        transform: scale(1.03);
+    }
+
+    /* Full-screen photo viewer */
+    #photo-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.97);
+    }
+
+    #photo-lightbox[hidden] {
+        display: none;
+    }
+
+    #lightbox-image {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100dvh - 32px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        z-index: 2;
+        width: 42px;
+        height: 42px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 50%;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+        #photo-lightbox {
+            padding: 8px;
+        }
+
+        #lightbox-image {
+            max-height: calc(100dvh - 16px);
+        }
+    }
+</style>
+
 <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 bg-dark-surface/50 border-y border-dark-border">
     <div class="max-w-7xl mx-auto space-y-10">
-        <!-- Section Header -->
+
         <div class="text-center space-y-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">High-Res Media</span>
-            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Press Photo Gallery</h2>
+            <span class="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
+                High-Res Media
+            </span>
+
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">
+                Press Photo Gallery
+            </h2>
+
             <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
-            <p class="text-xs text-gray-400 mt-2">Click any photo for full-screen lightbox preview.</p>
+
+            <p class="text-xs text-gray-400 mt-2">
+                Click a photo to view it in full screen.
+            </p>
         </div>
 
-        <!-- 13-Photo Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            
-            <!-- Photo 1 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 1.jpeg', 'Hugo 1', 0)">
-                    <img src="Hugo 1.jpeg" alt="Hugo 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+1';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 1.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 2 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 2.jpeg', 'Hugo 2', 1)">
-                    <img src="Hugo 2.jpeg" alt="Hugo 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+2';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 2.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 3 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 3.jpeg', 'Hugo 3', 2)">
-                    <img src="Hugo 3.jpeg" alt="Hugo 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+3';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 3.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 4 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 4.jpeg', 'Hugo 4', 3)">
-                    <img src="Hugo 4.jpeg" alt="Hugo 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+4';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 4.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 5 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 5.jpeg', 'Hugo 5', 4)">
-                    <img src="Hugo 5.jpeg" alt="Hugo 5" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+5';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 5.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 6 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 6.jpeg', 'Hugo 6', 5)">
-                    <img src="Hugo 6.jpeg" alt="Hugo 6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+6';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 6.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 7 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 7.jpeg', 'Hugo 7', 6)">
-                    <img src="Hugo 7.jpeg" alt="Hugo 7" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+7';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 7.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 8 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 8.jpeg', 'Hugo 8', 7)">
-                    <img src="Hugo 8.jpeg" alt="Hugo 8" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+8';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 8.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 9 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 9.jpeg', 'Hugo 9', 8)">
-                    <img src="Hugo 9.jpeg" alt="Hugo 9" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+9';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 9.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 10 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 10.JPG', 'Hugo 10', 9)">
-                    <img src="Hugo 10.JPG" alt="Hugo 10" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+10';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 10.JPG" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 11 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 11.jpeg', 'Hugo 11', 10)">
-                    <img src="Hugo 11.jpeg" alt="Hugo 11" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+11';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 11.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 12 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 12.png', 'Hugo 12', 11)">
-                    <img src="Hugo 12.png" alt="Hugo 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+12';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 12.png" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 13 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 13.png', 'Hugo 13', 12)">
-                    <img src="Hugo 13.png" alt="Hugo 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+13';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 13.png" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 14 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 13.jpeg', 'Hugo 14', 12)">
-                    <img src="Hugo 14.jpeg" alt="Hugo 13" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+14';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 14.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 15 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 15.jpeg', 'Hugo 15', 12)">
-                    <img src="Hugo 15.jpeg" alt="Hugo 15" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+15';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 15.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
-            <!-- Photo 16 -->
-            <div class="group relative bg-dark-card border border-dark-border rounded-xl overflow-hidden shadow-lg hover:border-gold/60 transition-all duration-300">
-                <div class="aspect-[4/3] overflow-hidden bg-black cursor-pointer relative" onclick="openLightbox('Hugo 16.jpeg', 'Hugo 16', 12)">
-                    <img src="Hugo 16.jpeg" alt="Hugo 16" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x450/1a1d22/d4af37?text=Hugo+16';">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                        <span class="w-10 h-10 rounded-full bg-gold/80 text-black flex items-center justify-center text-sm"><i class="fa-solid fa-expand"></i></span>
-                    </div>
-                </div>
-                <div class="absolute bottom-2 right-2 z-10">
-                    <a href="Hugo 16.jpeg" download title="Download Photo" class="w-8 h-8 rounded-full bg-dark-base/80 border border-gold/40 text-gold hover:bg-gold hover:text-black flex items-center justify-center text-xs transition-colors shadow-md"><i class="fa-solid fa-download"></i></a>
-                </div>
-            </div>
-
+        <div
+            id="photo-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         </div>
+
     </div>
 </section>
+
+<!-- FULL-SCREEN PHOTO VIEWER -->
+<div
+    id="photo-lightbox"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-label="Full-screen photo viewer"
+>
+    <button
+        type="button"
+        class="lightbox-close"
+        id="lightbox-close"
+        aria-label="Close photo"
+    >&times;</button>
+
+    <img id="lightbox-image" src="" alt="">
+</div>
+
+<script>
+(function () {
+    const photos = [
+        "Hugo 1.jpeg",
+        "Hugo 2.jpeg",
+        "Hugo 3.jpeg",
+        "Hugo 4.jpeg",
+        "Hugo 5.jpeg",
+        "Hugo 6.jpeg",
+        "Hugo 7.jpeg",
+        "Hugo 8.jpeg",
+        "Hugo 9.jpeg",
+        "Hugo 10.JPG",
+        "Hugo 11.jpeg",
+        "Hugo 12.png",
+        "Hugo 13.png",
+        "Hugo 14.jpeg",
+        "Hugo 15.jpeg",
+        "Hugo 16.jpeg"
+    ];
+
+    const grid = document.getElementById("photo-grid");
+    const lightbox = document.getElementById("photo-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const closeButton = document.getElementById("lightbox-close");
+
+    let previousFocus = null;
+
+    function openLightbox(src, alt, trigger) {
+        previousFocus = trigger || document.activeElement;
+
+        lightboxImage.src = src;
+        lightboxImage.alt = alt;
+
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+
+        closeButton.focus();
+    }
+
+    function closeLightbox() {
+        lightbox.hidden = true;
+        lightboxImage.src = "";
+        document.body.style.overflow = "";
+
+        if (previousFocus && typeof previousFocus.focus === "function") {
+            previousFocus.focus();
+        }
+    }
+
+    window.openLightbox = openLightbox;
+    window.closeLightbox = closeLightbox;
+
+    photos.forEach(function (src) {
+        const title = src.replace(/\.[^/.]+$/, "");
+
+        const card = document.createElement("article");
+        card.className = "press-photo-card";
+
+        const photoArea = document.createElement("div");
+        photoArea.className = "press-photo-area";
+        photoArea.setAttribute("role", "button");
+        photoArea.setAttribute("tabindex", "0");
+        photoArea.setAttribute("aria-label", "View " + title + " full screen");
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = title;
+        img.loading = "lazy";
+        img.className = "press-photo-thumbnail";
+
+        img.onerror = function () {
+            this.onerror = null;
+            this.alt = title + " image unavailable";
+        };
+
+        photoArea.appendChild(img);
+
+        photoArea.addEventListener("click", function () {
+            openLightbox(src, title, photoArea);
+        });
+
+        photoArea.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openLightbox(src, title, photoArea);
+            }
+        });
+
+        card.appendChild(photoArea);
+        grid.appendChild(card);
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !lightbox.hidden) {
+            closeLightbox();
+        }
+    });
+})();
+</script>
 
     <!-- 9. FOOTER -->
     <footer class="bg-dark-surface border-t border-dark-border py-12 px-4 sm:px-6 lg:px-8">
